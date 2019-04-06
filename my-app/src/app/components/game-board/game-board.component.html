@@ -1,0 +1,35 @@
+<!-- Panel to ask for a number -->
+<div *ngIf="showQuestion" class="question-panel">
+  <form name="answerForm" (ngSubmit)="giveAnswer()">
+    <h2> Guess a number between 1 and 100</h2>
+    <input
+      [(ngModel)] = "guessed"
+      (keydown) = "responseType = null"
+      name="guessed"
+      type="number"
+      min="1"
+      max="100"/> 
+
+      <button type="submit" [disabled] = "!checkValidity()">Send Answer</button>
+  </form>
+</div>
+
+<!-- Panel to show guessing answer-->
+<div *ngIf="responseType" class="message-solution">
+  <div [ngSwitch]="responseType">
+    <p *ngSwitchCase="'tooLow'">
+        Your guess, {{guessed}}, is too low 
+    </p>
+    <p *ngSwitchCase="'tooHigh'">
+        Your guess, {{guessed}}, is too high 
+    </p>
+    <p *ngSwitchCase="'gameOver'">
+        Your guess, {{ guessed }}, is correct.
+    </p>
+    <div *ngSwitchCase="'gameOver'" class="actions">
+      <button type="button" (click)="startGame()">Play again</button>
+      <button type="button" (click)="startGame()">Change options</button>
+    </div> 
+
+  </div>
+</div>
