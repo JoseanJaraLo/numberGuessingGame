@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { GameConfig } from 'src/app/app.model';
+import { GameConfig } from '../../app.model';
 
 @Component({
   selector: 'app-setup-form',
