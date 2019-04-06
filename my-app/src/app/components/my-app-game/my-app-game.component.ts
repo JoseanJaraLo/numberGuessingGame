@@ -13,4 +13,8 @@ export class MyAppGameComponent implements OnInit {
     
   }
 
+  startGame(event) {
+    console.info(event);
+  }
+
 }

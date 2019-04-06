@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GameConfig } from 'src/app/app.model';
 
 @Component({
   selector: 'app-setup-form',
@@ -7,14 +8,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./setup-form.component.sass']
 })
 export class SetupFormComponent implements OnInit {
+  @Output() sendGameConfig: EventEmitter<GameConfig> = new EventEmitter();
+
   gameSetup: FormGroup;
   constructor() { }
 
   ngOnInit() {
     this.gameSetup = new FormGroup({
-      modeHumanAsk: new FormControl('false', Validators.required),
+      modeHumanAsks: new FormControl('false', Validators.required),
       randomLevel: new FormControl('false')
     });
+  }
+
+  getFormData(): GameConfig {
+    const formData: GameConfig = {
+      mode: this.gameSetup.get('modeHumanAsks').value ? 'humanAsks' : 'machineAsks',
+      level: this.gameSetup.get('randomLevel').value ? 'random' : 'high'
+    };
+    return formData;
+  }
+
+  sendSetupConfig() {
+    let setupConf: GameConfig;
+    setupConf = this.getFormData();
+    this.sendGameConfig.emit(setupConf);
   }
 
 }

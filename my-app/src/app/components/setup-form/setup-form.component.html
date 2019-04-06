@@ -1,10 +1,13 @@
-<form novalidate [formGroup]="gameSetup">
+<form
+    novalidate
+    [formGroup]="gameSetup"
+    (ngSubmit)="sendSetupConfig()">
   <div class="form-control">
     <label class="switch">
       Mode
-      <input type="checkbox" formControlName="modeHumanAsk">
+      <input type="checkbox" formControlName="modeHumanAsks">
       <span class="slider"></span>
-      <span *ngIf="gameSetup.get('modeHumanAsk').value; else machineAsks">Human asks</span>
+      <span *ngIf="gameSetup.get('modeHumanAsks').value; else machineAsks">Human asks</span>
       <ng-template #machineAsks>Machine Asks</ng-template>
     </label>
   </div>
