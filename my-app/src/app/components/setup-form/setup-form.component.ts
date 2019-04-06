@@ -15,8 +15,8 @@ export class SetupFormComponent implements OnInit {
 
   ngOnInit() {
     this.gameSetup = new FormGroup({
-      modeHumanAsks: new FormControl('false', Validators.required),
-      randomLevel: new FormControl('false')
+      modeHumanAsks: new FormControl(false, Validators.required),
+      randomLevel: new FormControl(false, Validators.required)
     });
   }
 
