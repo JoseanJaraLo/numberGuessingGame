@@ -1,3 +1,22 @@
-<p>
-  setup-form works!
-</p>
+<form novalidate [formGroup]="gameSetup">
+  <div class="form-control">
+    <label class="switch">
+      Mode
+      <input type="checkbox" formControlName="modeHumanAsk">
+      <span class="slider"></span>
+      <span *ngIf="gameSetup.get('modeHumanAsk').value; else machineAsks">Human asks</span>
+      <ng-template #machineAsks>Machine Asks</ng-template>
+    </label>
+  </div>
+  <div
+    class="form-control">
+    <label class="switch">
+      Level
+      <input type="checkbox" formControlName="randomLevel">
+      <span class="slider"></span>
+      <span *ngIf="gameSetup.get('randomLevel').value; else highlevel">Random level</span>
+      <ng-template #highlevel>High level</ng-template>
+    </label>
+  </div>
+  <button type="submit" [disabled]="gameSetup.invalid">Start Game</button>
+</form>
