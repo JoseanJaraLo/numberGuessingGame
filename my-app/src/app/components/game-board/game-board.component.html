@@ -1,50 +1,60 @@
 <!-- Panel to ask for a number -->
 <div *ngIf="showQuestion" class="message-panel">
-  <form name="answerForm" (ngSubmit)="giveGuessedToMachine()">
-    <h2> Guess a number between 1 and 100</h2>
-    <input
-      [(ngModel)] = "guessed"
-      (keydown) = "responseType = null"
-      name="guessed"
-      type="number"
-      min="1"
-      max="100"
-      step="1"/> 
-
-      <button type="submit" [disabled] = "!checkValidity()">Send Answer</button>
-  </form>
+  <div class="message-content">
+    <form name="answerForm" (ngSubmit)="giveGuessedToMachine()">
+      <p class="main-text"> Guess a number between 1 and 100</p>
+      <input
+        class="text-input"
+        [(ngModel)] = "guessed"
+        (keydown) = "responseType = null"
+        name="guessed"
+        type="number"
+        min="1"
+        max="100"
+        step="1"/> 
+  
+        <button id="send-answer" class="button" type="submit" [disabled] = "!checkValidity()">Send Answer</button>
+    </form>
+  </div>
 </div>
 
 <!-- Panel to show machine answer to human guess-->
 <div *ngIf="responseType" class="message-panel">
-  <div [ngSwitch]="responseType">
-    <p *ngSwitchCase="'tooLow'">
-        Your guess, {{guessed}}, is too low 
-    </p>
-    <p *ngSwitchCase="'tooHigh'">
-        Your guess, {{guessed}}, is too high 
-    </p>
-    <p *ngSwitchCase="'gameOver'">
-        Your guess, {{ guessed }}, is correct.
-    </p>
-    <div *ngSwitchCase="'gameOver'" class="actions">
-      <button type="button" (click)="startGame()">Play again</button>
-      <button type="button" (click)="changeOptions()">Change options</button>
-    </div> 
-
-  </div>
+    <div class="message-content">
+      <div [ngSwitch]="responseType">
+        <p class="main-text" *ngSwitchCase="'tooLow'">
+            Your guess, {{guessed}}, is too low 
+        </p>
+        <p class="main-text" *ngSwitchCase="'tooHigh'">
+            Your guess, {{guessed}}, is too high 
+        </p>
+        <p class="main-text" *ngSwitchCase="'gameOver'">
+            Your guess, {{ guessed }}, is correct.
+        </p>
+        <div *ngSwitchCase="'gameOver'" class="actions">
+          <button class="button" type="button" (click)="startGame()">Play again</button>
+          <button class="button" type="button" (click)="changeOptions()">Change options</button>
+        </div> 
+      </div>
+    </div>
 </div>
 
 <!-- Panel to show message while human is thinking of a number-->
 <div *ngIf="thinkingOfANumber" class="message-panel">
-  <p>Let's start, Think of a number and press "start" button when you are ready.</p>
-  <button type="button" (click)="machineGuess()">Start</button>
+    <div class="message-content">
+      <p class="main-text">Let's start, Think of a number and press "start" button when you are ready.</p>
+      <button class="button" type="button" (click)="machineGuess()">Start</button>
+    </div>
 </div>
 
 <!-- Panel to give human answer to machine guess -->
 <div *ngIf="showGuessed" class="message-panel">
-  <p>Are you thinking on the number {{ guessed }}?</p>
-  <button type="button" (click)="giveAnswerToMachine('tooLow')">No, you guessed too low</button>
-  <button type="button" (click)="giveAnswerToMachine('tooHigh')">No, you guessed too high</button>
-  <button type="button" (click)="giveAnswerToMachine('gameOver')">Yes, this is the number</button>
+    <div class="message-content">
+      <p class="main-text">Are you thinking on the number {{ guessed }}?</p>
+      <div class="actions">
+        <button class="button" type="button" (click)="giveAnswerToMachine('tooLow')">No, you guessed too low</button>
+        <button class="button" type="button" (click)="giveAnswerToMachine('tooHigh')">No, you guessed too high</button>
+        <button class="button success" type="button" (click)="giveAnswerToMachine('gameOver')">Yes, this is the number</button>
+      </div>
+    </div>
 </div>

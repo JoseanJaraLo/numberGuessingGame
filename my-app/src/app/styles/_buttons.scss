@@ -34,4 +34,17 @@
             width: 100%;
         }
     }
+
+    &.success {
+        background-color: $gng-primary-green;
+        &:before {
+            border-top: 2px solid $gng-primary-green;
+        }
+        &:after {
+            border-bottom: 2px solid $gng-primary-green;
+        }
+        &:hover {
+            background-color: $gng-primary-green;
+        }
+    }
   }

@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+
+.message-panel {
+    border: 3px solid $gng-primary-green;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .message-content {
+        margin: 1.2em;
+        width: 550px;
+        text-align: center;
+        .main-text {
+            font-size: 1.2em;
+            color: #1073ba;
+            font-weight: bold;
+        }
+        .actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-flow: wrap;
+            button {
+                margin: 1em;
+                width: 290px
+            }
+        }
+        input[name='guessed'] {
+            margin: 12px;
+            text-align: center;
+        }
+    }
+}

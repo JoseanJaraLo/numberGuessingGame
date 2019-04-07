@@ -1,5 +1,6 @@
 @import './variables';
 
+/* Styles toggle switch*/
 .switch {
     position: relative;
     display: inline-block;
@@ -46,4 +47,15 @@
         transition: .4s;
       }
     }
+  }
+
+  /*Styles text input*/
+  input.text-input {
+      padding: 8px;
+      border: 2px solid $gng-primary-blue;
+      font-weight: bold;
+      color: $gng-primary-blue;
+      &[type='number'] {
+          text-align: right;
+      }
   }
