@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyAppGameComponent } from './my-app-game.component';
 import { SetupFormComponent } from '../setup-form/setup-form.component';
 import { GameBoardComponent } from '../game-board/game-board.component';
+import { GameState, GameConfig } from '../../app.model';
 
 
 describe('MyAppGameComponent', () => {
@@ -25,5 +26,26 @@ describe('MyAppGameComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('checks initial values for the app', () => {
+    component.ngOnInit();
+    expect(component.gameState).toBe('setup');
+  });
+
+  it('should update state after startGame()', () => {
+    const mockedConfig: GameConfig = {
+      mode: 'humanAsks',
+      level: 'random'
+    };
+    component.startGame(mockedConfig);
+    expect(component.gameConfig).toEqual(mockedConfig);
+    expect(component.gameState).toBe('play');
+  });
+
+  it('should update state after showOptions()', () => {
+    component.gameState = 'play';
+    component.showOptions();
+    expect(component.gameState).toBe('setup');
   });
 });
