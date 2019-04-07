@@ -160,7 +160,30 @@ describe('GameBoardComponent', () => {
     component.mode = 'machineAsks';
     component.startGame();
     expect(component.thinkingOfANumber).toBeTruthy();
+  });
 
+  it('checks that app values are rightly reset', () => {
+    component.limitTop = null;
+    component.limitBottom = null;
+    component.gameFinished = true;
+    component.magicNumber = null;
+    component.showQuestion = true;
+    component.responseType = 'gameOver';
+    component.guessed = 0;
+    component.thinkingOfANumber = true;
+    component.showGuessed = true;
+
+    component.resetGame();
+
+    expect(component.limitTop).toBe(MAX_VALUE);
+    expect(component.limitBottom).toBe(MIN_VALUE);
+    expect(component.gameFinished).toBeFalsy();
+    expect(component.magicNumber).toBe(0);
+    expect(component.showQuestion).toBeFalsy();
+    expect(component.responseType).toBeNull();
+    expect(component.guessed).toBeNull();
+    expect(component.thinkingOfANumber).toBeFalsy();
+    expect(component.showGuessed).toBeFalsy();
   });
 
 });
