@@ -130,6 +130,8 @@ export class GameBoardComponent implements OnInit {
     this.showQuestion = false;
     this.responseType = null;
     this.guessed = null;
+    this.thinkingOfANumber = false;
+    this.showGuessed = false;
   }
 
 }
