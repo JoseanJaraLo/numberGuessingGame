@@ -4,3 +4,4 @@ export interface GameConfig {
 }
 
 export type  GuessResponse = 'tooLow' | 'tooHigh' | 'gameOver' | null;
+export type  GameState = 'setup' | 'play';
