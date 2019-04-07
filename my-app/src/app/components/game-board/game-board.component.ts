@@ -8,29 +8,35 @@ import { MAX_VALUE, MIN_VALUE } from '../../app.constants';
   styleUrls: ['./game-board.component.sass']
 })
 export class GameBoardComponent implements OnInit {
-  @Input() mode: string = 'humanAsks';
-  @Input() level: string = 'random';
+  @Input() mode: string = 'machineAsks';
+  @Input() level: string = 'high';
   @Output() displayOptions: EventEmitter<any> = new EventEmitter();
 
   // Max number to be guessed.
   limitTop: number;
 
-  //Min number to be guessed
+  // Min number to be guessed
   limitBottom: number;
 
-  //Indicates that the game has finished
+  // Indicates that the game has finished
   gameFinished: boolean = false;
 
-  //Number to be guessed when the human asks
+  // Number to be guessed when the human asks
   magicNumber: number;
 
-  //Ask for a number to the human
+  // Asks for a number to the human
   showQuestion: boolean = false;
 
-  //Number guessed to be checked
+  // Shows a panel while human is thinking of a number
+  thinkingOfANumber: boolean = false;
+
+  // Shows the number guessed by the machine.
+  showGuessed: boolean = false
+
+  // Number guessed to be checked
   guessed: number;
 
-  //Type of answer message after checking the number.
+  // Type of answer message after checking the number.
   responseType: GuessResponse;
 
 
@@ -51,10 +57,8 @@ export class GameBoardComponent implements OnInit {
   checkAnswer(guessed: number): GuessResponse {
     let guessAnswer: GuessResponse;
     if(guessed > this.magicNumber) {
-      this.limitBottom = guessed;
       guessAnswer = 'tooHigh';
     } else if ( guessed < this.magicNumber) {
-      this.limitTop = guessed;
       guessAnswer = 'tooLow';
     } else {
       this.gameFinished = true;
@@ -75,10 +79,37 @@ export class GameBoardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  giveAnswer() {
+  giveAnswerToMachine(guessResponse: GuessResponse) {
+    this.showGuessed = false;
+    switch(guessResponse) {
+      case 'tooLow':
+        this.limitBottom = this.guessed + 1;
+        this.machineGuess();
+        break;
+      case 'tooHigh':
+        this.limitTop = this.guessed - 1;
+        this.machineGuess();
+        break;
+      case 'gameOver':
+        this.responseType = guessResponse;
+    }
+  }
+
+  giveGuessedToMachine() {
     if(this.checkValidity()) {
       this.responseType = this.checkAnswer(this.guessed);
     }
+  }
+
+  machineGuess() {
+    this.thinkingOfANumber = false;
+    if (this.level === 'random') {
+      this.guessed = this.generateNumber(this.limitBottom, this.limitTop);
+    } else {
+      this.guessed = Math.floor((this.limitBottom + this.limitTop) / 2);
+    }
+    this.showGuessed = true;
+
   }
 
   startGame() {
@@ -86,12 +117,14 @@ export class GameBoardComponent implements OnInit {
     if(this.mode === 'humanAsks') {
       this.magicNumber = this.generateNumber(this.limitBottom, this.limitTop);
       this.showQuestion = true;
+    } else {
+      this.thinkingOfANumber = true;
     }
   }
 
   resetGame() {
-    this.limitTop = MAX_VALUE + 1;
-    this.limitBottom = MIN_VALUE - 1;
+    this.limitTop = MAX_VALUE;
+    this.limitBottom = MIN_VALUE;
     this.gameFinished = false;
     this.magicNumber = 0;
     this.showQuestion = false;

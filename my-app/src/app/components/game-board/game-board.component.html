@@ -1,6 +1,6 @@
 <!-- Panel to ask for a number -->
-<div *ngIf="showQuestion" class="question-panel">
-  <form name="answerForm" (ngSubmit)="giveAnswer()">
+<div *ngIf="showQuestion" class="message-panel">
+  <form name="answerForm" (ngSubmit)="giveGuessedToMachine()">
     <h2> Guess a number between 1 and 100</h2>
     <input
       [(ngModel)] = "guessed"
@@ -8,14 +8,15 @@
       name="guessed"
       type="number"
       min="1"
-      max="100"/> 
+      max="100"
+      step="1"/> 
 
       <button type="submit" [disabled] = "!checkValidity()">Send Answer</button>
   </form>
 </div>
 
-<!-- Panel to show guessing answer-->
-<div *ngIf="responseType" class="message-solution">
+<!-- Panel to show machine answer to human guess-->
+<div *ngIf="responseType" class="message-panel">
   <div [ngSwitch]="responseType">
     <p *ngSwitchCase="'tooLow'">
         Your guess, {{guessed}}, is too low 
@@ -28,8 +29,26 @@
     </p>
     <div *ngSwitchCase="'gameOver'" class="actions">
       <button type="button" (click)="startGame()">Play again</button>
-      <button type="button" (click)="startGame()">Change options</button>
+      <button type="button" (click)="changeOptions()">Change options</button>
     </div> 
 
   </div>
 </div>
+
+<!-- Panel to show message while human is thinking of a number-->
+<div *ngIf="thinkingOfANumber" class="message-panel">
+  <p>Let's start, Think of a number and press "start" button when you are ready.</p>
+  <button type="button" (click)="machineGuess()">Start</button>
+</div>
+
+<!-- Panel to give human answer to machine guess -->
+<div *ngIf="showGuessed" class="message-panel">
+  <p>Are you thinking on the number {{ guessed }}?</p>
+  <button type="button" (click)="giveAnswerToMachine('tooLow')">No, you guessed too low</button>
+  <button type="button" (click)="giveAnswerToMachine('tooHigh')">No, you guessed too high</button>
+  <button type="button" (click)="giveAnswerToMachine('gameOver')">Yes, this is the number</button>
+</div>
+
+{{this.limitBottom}}<br>
+{{this.limitTop}}
+
