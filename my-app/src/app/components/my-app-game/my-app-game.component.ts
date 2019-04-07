@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameState, GameConfig } from '../../app.model';
 
 
 @Component({
@@ -7,14 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-app-game.component.sass']
 })
 export class MyAppGameComponent implements OnInit {
+  gameState: GameState;
+  gameConfig: GameConfig;
+
   constructor() { }
 
   ngOnInit() {
-    
+    this.gameState = 'setup';
   }
 
   startGame(event) {
-    console.info(event);
+    this.gameConfig = event;
+    this.gameState = 'play';
+  }
+
+  showOptions() {
+    this.gameState = 'setup';
   }
 
 }
