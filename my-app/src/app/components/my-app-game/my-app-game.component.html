@@ -1,6 +1,11 @@
 
-<h1>Guessing Number Game</h1>
-<div class="app-content" [ngSwitch]="gameState">
-    <app-setup-form *ngSwitchCase="'setup'" (sendGameConfig)="startGame($event)"></app-setup-form>
-    <app-game-board *ngSwitchCase="'play'" (displayOptions) = "showOptions()" [mode]="gameConfig.mode" [level]="gameConfig.level"></app-game-board>
+<div id="page-container">
+    <h1 class="page-title">Guessing Number Game</h1>
+    <div class="image-container">
+        <img class="image-game" src="../../../assets/images/numbers.png" alt="numbers">
+    </div>
+    <div class="app-content" [ngSwitch]="gameState">
+        <app-setup-form *ngSwitchCase="'setup'" (sendGameConfig)="startGame($event)"></app-setup-form>
+        <app-game-board *ngSwitchCase="'play'" (displayOptions) = "showOptions()" [mode]="gameConfig.mode" [level]="gameConfig.level"></app-game-board>
+    </div>
 </div>

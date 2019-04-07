@@ -5,7 +5,7 @@ import { MAX_VALUE, MIN_VALUE } from '../../app.constants';
 @Component({
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
-  styleUrls: ['./game-board.component.sass']
+  styleUrls: ['./game-board.component.scss']
 })
 export class GameBoardComponent implements OnInit {
   @Input() mode: string = 'machineAsks';

@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+
+form {
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid $gng-primary-green;
+    border-bottom: 3px solid $gng-primary-green;
+    justify-content: center;
+    .form-control {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 1.2em;
+        height: 50px;
+        .switch-container {
+            width: 200px;
+            .switch-label {
+                display: block;
+                font-weight: bold;
+                color: $gng-primary-gray-200
+            }
+            .switch-value {
+                padding-left: 0.5em;
+                font-size: 0.8em;
+                color: $gng-primary-blue;
+            }
+        }
+        button {
+            width: 200px;
+        }
+    }
+}

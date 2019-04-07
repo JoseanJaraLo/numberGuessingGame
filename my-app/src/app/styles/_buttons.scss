@@ -1,0 +1,37 @@
+@import './variables';
+
+.button {
+    text-transform: uppercase;
+    background-color: $gng-primary-blue;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    padding: 12px 40px 10px;
+    position: relative;
+    &:before, &:after {
+        border: 0 solid transparent;
+        transition: all 0.25s;
+        content: '';
+        height: 24px;
+        position: absolute;
+        width: 24px;
+    }
+    &:before {
+        border-top: 2px solid $gng-primary-blue;
+        left: 0px;
+        top: -5px;
+    }
+    &:after {
+        border-bottom: 2px solid $gng-primary-blue;
+        bottom: -5px;
+        right: 0px;
+    }
+
+    &:hover {
+        background-color: $gng-primary-blue;
+        &:before, &:after {
+            height: 100%;
+            width: 100%;
+        }
+    }
+  }

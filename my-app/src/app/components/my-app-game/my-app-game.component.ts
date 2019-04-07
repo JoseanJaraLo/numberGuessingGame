@@ -5,7 +5,7 @@ import { GameState, GameConfig } from '../../app.model';
 @Component({
   selector: 'app-game',
   templateUrl: './my-app-game.component.html',
-  styleUrls: ['./my-app-game.component.sass']
+  styleUrls: ['./my-app-game.component.scss']
 })
 export class MyAppGameComponent implements OnInit {
   gameState: GameState;

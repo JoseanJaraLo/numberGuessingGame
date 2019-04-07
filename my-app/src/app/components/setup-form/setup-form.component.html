@@ -3,23 +3,30 @@
     [formGroup]="gameSetup"
     (ngSubmit)="sendSetupConfig()">
   <div class="form-control">
-    <label class="switch">
-      Mode
-      <input type="checkbox" formControlName="modeHumanAsks">
-      <span class="slider"></span>
-      <span *ngIf="gameSetup.get('modeHumanAsks').value; else machineAsks">Human asks</span>
-      <ng-template #machineAsks>Machine Asks</ng-template>
-    </label>
+    <div class="switch-container">
+      <label class="switch-label">Mode</label>
+      <label class="switch">
+        <input type="checkbox" formControlName="modeHumanAsks">
+        <span class="slider"></span>
+      </label>
+      <span class="switch-value" *ngIf="gameSetup.get('modeHumanAsks').value; else machineAsks">Human asks</span>
+      <ng-template #machineAsks><span class="switch-value">Machine Asks</span></ng-template>
+    </div>
   </div>
   <div
     class="form-control">
-    <label class="switch">
-      Level
-      <input type="checkbox" formControlName="randomLevel">
-      <span class="slider"></span>
-      <span *ngIf="gameSetup.get('randomLevel').value; else highlevel">Random level</span>
-      <ng-template #highlevel>High level</ng-template>
-    </label>
+    <div *ngIf="gameSetup.get('modeHumanAsks').value" class="switch-container">
+      <label class="switch-label">Machine level</label>
+      <label class="switch">
+        <input type="checkbox" formControlName="randomLevel">
+        <span class="slider"></span>
+      </label>
+      <span class="switch-value" *ngIf="gameSetup.get('randomLevel').value; else highlevel">Random level</span>
+      <ng-template #highlevel><span class="switch-value">High Level</span></ng-template>
+    </div>
   </div>
-  <button type="submit" [disabled]="gameSetup.invalid">Start Game</button>
+  <div
+    class="form-control">
+    <button class="button" type="submit" [disabled]="gameSetup.invalid">Start Game</button>
+  </div>
 </form>
