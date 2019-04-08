@@ -4,6 +4,7 @@
     <form name="answerForm" (ngSubmit)="giveGuessedToMachine()">
       <p class="main-text"> Guess a number between 1 and 100</p>
       <input
+        id="send-answer"
         class="text-input"
         [(ngModel)] = "guessed"
         (keydown) = "responseType = null"
@@ -13,7 +14,7 @@
         max="100"
         step="1"/> 
   
-        <button id="send-answer" class="button" type="submit" [disabled] = "!checkValidity()">Send Answer</button>
+        <button class="button" type="submit" [disabled] = "!checkValidity()">Send Answer</button>
     </form>
   </div>
 </div>

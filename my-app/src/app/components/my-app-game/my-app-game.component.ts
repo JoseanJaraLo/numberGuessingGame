@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameState, GameConfig } from '../../app.model';
 
 
+
 @Component({
   selector: 'app-game',
   templateUrl: './my-app-game.component.html',
